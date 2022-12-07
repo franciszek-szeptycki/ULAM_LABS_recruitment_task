@@ -15,7 +15,7 @@ const Widget = (props: { id: string; index: number }) => {
         },
 	});
 	
-	console.log(content)
+	// console.log(content)
 
     switch (status) {
         case "loading":

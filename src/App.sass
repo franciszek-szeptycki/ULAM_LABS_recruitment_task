@@ -8,16 +8,20 @@
 		position: absolute
 		display: flex
 		width: 200vw
-		left: 0vw
-
-	.wrapper.panel-hidden
+		
+	.wrapper.panel-mode1
 		left: -100vw
-		background-color: cadetblue
+
+	.wrapper.panel-mode2
+		left: 0vw
 
 	.aside
 		width: 50%
+		height: 100vh
 		max-width: 450px
-		background-color: red
+		// background-image: url('./assets/img/purple.webp')
+		// background-size: 100% 100%
+		background-color: cadetblue
 
 		.toggle
 			position: fixed
@@ -27,9 +31,8 @@
 			transition: 0
 	
 	.main
-		// width: 50%
 		flex-grow: 1
-		background-color: cadetblue
+		height: 100vh
 
 
 
@@ -37,5 +40,7 @@
 	.App
 		.wrapper
 			width: calc(100vw + 450px)
-		.wrapper.panel-hidden
+		.wrapper.panel-mode1
+			left: 0px
+		.wrapper.panel-mode2
 			left: -450px
