@@ -1,0 +1,41 @@
+.App
+	width: 100vw
+	height: 100vh
+	overflow: hidden
+	position: relative
+
+	.wrapper
+		position: absolute
+		display: flex
+		width: 200vw
+		left: 0vw
+
+	.wrapper.panel-hidden
+		left: -100vw
+		background-color: cadetblue
+
+	.aside
+		width: 50%
+		max-width: 450px
+		background-color: red
+
+		.toggle
+			position: fixed
+			z-index: 1
+			top: 0
+			right: 50%
+			transition: 0
+	
+	.main
+		// width: 50%
+		flex-grow: 1
+		background-color: cadetblue
+
+
+
+@media (min-width: 451px)
+	.App
+		.wrapper
+			width: calc(100vw + 450px)
+		.wrapper.panel-hidden
+			left: -450px
