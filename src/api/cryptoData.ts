@@ -7,12 +7,18 @@ const newsAPI = axios.create({
     },
 });
 
+// GET PRICES OF CRYPTOCURRENCY FROM THE LAST 24H
 export const getCryptoPrices = async (id: string, vsCurrency: string): Promise<any> => {
-	// REQUEST AND RETURN
-	return await newsAPI.get(`coins/${id}/market_chart?vs_currency=${vsCurrency}&days=1`)
+	return newsAPI.get(`coins/${id}/market_chart?vs_currency=${vsCurrency}&days=1`)
+
 };
 
-export const getCryptoList = async () => {
-	// REQUEST AND RETURN
+// GET LIST OF AVAILABLE CRYPTOCURRENCIES
+export const getCryptoList = async (): Promise<any> => {
 	return await newsAPI.get("coins")
+}
+
+// GET DATA OF SPECIFIC CRYPTOCURRENCY
+export const getCryptoInfo = async (id: string): Promise<any> => {
+	return await newsAPI.get(`coins/${id}`)
 }

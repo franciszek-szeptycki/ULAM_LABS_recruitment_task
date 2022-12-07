@@ -1,29 +1,14 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
-import { getCryptoPrices } from './api/cryptoData'
-import { useQuery } from "react-query";
-
+import Search from "./components/search/Search";
+import Container from "./components/container/Container";
 
 const App = () => {
-
-    const [cryptoCurrencies, setCryptoCurrencies] = useState<any>()
-
-    const { status } = useQuery('get-crypto-data', () => {
-        return getCryptoPrices("bitcoin", "usd")
-    }, {
-        onSuccess: (newData) => {
-            setCryptoCurrencies(newData)
-        }
-    })
-
-    console.log(cryptoCurrencies)
-
     return (
         <div className="App">
-            haha
+            <Search />
+            <Container />
         </div>
     );
-}
+};
 
 export default App;
