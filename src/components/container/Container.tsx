@@ -6,13 +6,14 @@ import Widget from "../widget/Widget";
 
 const Container = () => {
 
-    const coinsList: string[] | undefined = useContext(CoinsContext)?.context
+    const contextCoins: string[] | undefined = useContext(CoinsContext)?.context
 
     return (
         <div className="container">
+            <button onClick={() => console.log(contextCoins)}>check</button>
             <ul className="container__ul">
-                {coinsList && coinsList.length ? (
-                    coinsList.map((item: string, index: number) => (
+                {contextCoins && contextCoins.length ? (
+                    contextCoins.map((item: string, index: number) => (
                         <li key={index} className="container__li">
                             <Widget id={item} index={index} />
                         </li>

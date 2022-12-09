@@ -7,9 +7,14 @@ export const initCoinsContext = (): string[] => {
 	return localCoins
 }
 
-export const CoinsContext = createContext<ContextType | null>(null)
+export const defaultObject = {
+	context: [""],
+	setContext: () => { }
+}
 
-export type ContextType = {
+export const CoinsContext = createContext<ContextType>(defaultObject)
+
+type ContextType = {
 	context: string[]
 	setContext: (context: string[]) => void
 }

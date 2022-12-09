@@ -10,7 +10,7 @@ export const getLocalCoins = (): string[] => {
 };
 
 // ADDS NEW CRYPTOCURRENCIES TO THE CONTAINER
-export const setLocalCoins = (id: string): boolean => {
+export const setLocalCoin = (id: string): boolean => {
 	const localCoins = getLocalCoins()
 	if (localCoins.length >= 5) return false;
 	
@@ -33,6 +33,6 @@ export const setInitialCoins = (): void => {
 export const checkIsUserNew = (): boolean => {
 	const isUserNew = localStorage.getItem(IS_USER_NEW)
 
-	if (isUserNew) return true
+	if (!isUserNew) return true
 	else return false
 }

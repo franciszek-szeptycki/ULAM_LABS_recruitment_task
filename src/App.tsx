@@ -1,9 +1,8 @@
 import Search from "./components/search/Search";
 import Container from "./components/container/Container";
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import "./App.sass";
 import { CoinsContext, initCoinsContext } from "./context";
-// import { CoinsContext, initCoinsContext } from "./context";
 
 const App = () => {
     const [panelMode, setPanelMode] = useState(1);
@@ -12,11 +11,17 @@ const App = () => {
         setPanelMode(nextMode)
     }
 
-    const coinContext = () => initCoinsContext()
-    const [coinsContextValue, setCoinsContextValue] = useState(coinContext)
+
+    const [coinsContextValue, setCoinsContextValue] = useState(initCoinsContext())
+    const handleChangeCoinsValue = (data: string[]) => {
+        setCoinsContextValue(data)
+    }
+    
+    console.log("robi")
+    console.log(coinsContextValue)
 
     return (
-        <CoinsContext.Provider value={{context: coinsContextValue, setContext: setCoinsContextValue}}>
+        <CoinsContext.Provider value={{context: coinsContextValue, setContext: handleChangeCoinsValue}}>
             <div className="App">
             <div className={`wrapper panel-mode${panelMode}`}>
                 <aside className="aside">

@@ -1,18 +1,14 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
-import { setLocalCoins } from "../../utils/manageLocalStorage";
 import { getCoinsList } from "../../api/coinAPI";
 import "./Search.sass";
 import SearchLi from "./SearchLi";
 
 const Search = () => {
+    
     const [inputValue, setInputValue] = useState("");
     const [coinsList, setCoinsList] = useState<string[]>([]);
     const [suggestions, setSuggestions] = useState<string[]>([]);
-
-    const handleSubmit = (e: any) => {
-        setLocalCoins(inputValue);
-    };
 
     const { status } = useQuery("get-coin-list", () => getCoinsList(), {
         onSuccess: (props) => {
