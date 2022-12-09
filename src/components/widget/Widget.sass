@@ -11,6 +11,30 @@
 	
 	position: relative
 
+	&__shortcut
+		display: flex
+		align-items: center
+		gap: 10px
+
+
+		&-symbol
+			color: $gray-1
+			font-size: 1.2rem
+
+		&-name
+			color: $gray-2
+			font-size: 1.2rem
+			margin-left: 10px
+			word-wrap: break-word
+			max-width: 35vw
+
+	&__info
+		display: none
+		font-size: 1.2rem
+		color: $gray-2
+		padding-right: 60px
+
+
 	&__close, &__icon-chart
 		position: absolute
 		width: 20px
@@ -30,30 +54,6 @@
 		right: 40px
 		background-color: $light-blue
 
-		i
-		
-
-
-	&__shortcut
-		display: flex
-		align-items: center
-		gap: 10px
-
-		&-symbol
-			color: $gray-1
-			font-size: 1.2rem
-
-		&-name
-			color: $gray-2
-			font-size: 1.2rem
-			margin-left: 10px
-			word-wrap: break-word
-
-	&__info
-		display: none
-		font-size: 1.2rem
-		color: $gray-2
-		margin-right: 30px
 
 @media (min-width: 601px)
 	.widget

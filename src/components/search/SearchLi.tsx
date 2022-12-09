@@ -29,27 +29,27 @@ const SearchLi = (props: { id: string; inputClear: () => {} }) => {
         console.log("succesfully selected");
     };
 
-    const [imageURL, setImageURL] = useState("");
-    const [symbol, setSymbol] = useState("");
+    const [content, setContent] = useState<any>()
 
-    const { status } = useQuery(
+    const { isRefetching , status } = useQuery(
         `search-get-${id}-info`,
         () => getCoinInfo(id),
         {
             onSuccess: (data) => {
-                setSymbol(data.data.symbol);
-                setImageURL(data.data.image.thumb);
+                setContent(data.data);
             },
         }
     );
 
     switch (status) {
         case "success":
+            if (isRefetching) return <></>
+            
             return (
                 <li className="search__li" onClick={handleSearchCoin}>
-                    <img src={imageURL} className="search__li-img" />
+                    <img src={content.image.thumb} className="search__li-img" />
                     <p className="search__li-name">
-                        {symbol} - {id}
+                        {content.symbol} - {content.name}
                     </p>
                 </li>
             );

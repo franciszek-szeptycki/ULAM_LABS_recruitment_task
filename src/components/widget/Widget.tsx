@@ -70,7 +70,7 @@ const Widget = (props: { id: string }) => {
                         <p className="widget__shortcut-name">{content.name}</p>
                     </div>
                     <div className="widget__info">
-                        price: {content.market_data.current_price["usd"]}
+                        {content.market_data.current_price["usd"]} USD
                     </div>
                     <div className="widget__icon-chart">
                         <i className="fa-solid fa-chart-column"></i>

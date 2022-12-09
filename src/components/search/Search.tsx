@@ -25,7 +25,7 @@ const Search = () => {
         if (!text) return setSuggestions([]);
 
         const options: string[] = coinsList.filter((item) =>
-            item.includes(text)
+            item.includes(text.toLowerCase())
         );
         setSuggestions(options);
     };
