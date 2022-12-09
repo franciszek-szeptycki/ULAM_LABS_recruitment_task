@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react";
+import { ContextType, useContext, useEffect, useState } from "react";
+import { CoinsContext } from "../../context";
 import { getLocalCoins, setInitialCoins } from "../../utils/manageLocalStorage";
 import Widget from "../widget/Widget";
 
+
 const Container = () => {
-    const [currencies, setCurrencies] = useState(getLocalCoins());
 
-    useEffect(() => {
-        const localCoins = getLocalCoins();
-
-        if (!localCoins.length) {
-            setInitialCoins();
-            setCurrencies(getLocalCoins);
-        }
-    }, []);
+    const coinsList: string[] | undefined = useContext(CoinsContext)?.context
 
     return (
         <div className="container">
             <ul className="container__ul">
-                {currencies.length ? (
-                    currencies.map((item, index) => (
+                {coinsList && coinsList.length ? (
+                    coinsList.map((item: string, index: number) => (
                         <li key={index} className="container__li">
                             <Widget id={item} index={index} />
                         </li>

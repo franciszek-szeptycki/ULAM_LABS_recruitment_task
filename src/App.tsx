@@ -1,18 +1,23 @@
 import Search from "./components/search/Search";
 import Container from "./components/container/Container";
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
 import "./App.sass";
+import { CoinsContext, initCoinsContext } from "./context";
+// import { CoinsContext, initCoinsContext } from "./context";
 
 const App = () => {
-    // const [darkmodeOff, setDarkmodeOff] = useState(true)
     const [panelMode, setPanelMode] = useState(1);
     const handlePanelMode = () => {
         const nextMode = panelMode === 1 ? 2 : 1
         setPanelMode(nextMode)
     }
 
+    const coinContext = () => initCoinsContext()
+    const [coinsContextValue, setCoinsContextValue] = useState(coinContext)
+
     return (
-        <div className="App">
+        <CoinsContext.Provider value={{context: coinsContextValue, setContext: setCoinsContextValue}}>
+            <div className="App">
             <div className={`wrapper panel-mode${panelMode}`}>
                 <aside className="aside">
                     <button
@@ -28,6 +33,7 @@ const App = () => {
                 </main>
             </div>
         </div>
+        </CoinsContext.Provider>
     );
 };
 
