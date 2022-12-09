@@ -17,10 +17,12 @@ const SearchLi = (props: { id: string }) => {
 		
 		// CHECK COINS LIMIT
 		const done = setLocalCoin(id)
-		if (!done) console.log("too much coins")
+		if (!done) return console.log("too much coins")
 
 		// SET COIN IN CONTEXT
-		setContextCoins(localCoins)
+		const newLocalCoins = getLocalCoins()
+		console.log(newLocalCoins)
+		setContextCoins(newLocalCoins)
 
 		console.log("succesfully selected")
 		

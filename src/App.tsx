@@ -11,14 +11,10 @@ const App = () => {
         setPanelMode(nextMode)
     }
 
-
     const [coinsContextValue, setCoinsContextValue] = useState(initCoinsContext())
     const handleChangeCoinsValue = (data: string[]) => {
         setCoinsContextValue(data)
     }
-    
-    console.log("robi")
-    console.log(coinsContextValue)
 
     return (
         <CoinsContext.Provider value={{context: coinsContextValue, setContext: handleChangeCoinsValue}}>
