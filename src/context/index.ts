@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { getLocalCoins, setInitialCoins } from "../utils/manageLocalStorage";
+import { getLocalCoins, setInitialCoins } from "../utils/localStorageManagment";
 
 export const initCoinsContext = (): string[] => {
 	setInitialCoins()

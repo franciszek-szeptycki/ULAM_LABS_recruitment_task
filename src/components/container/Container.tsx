@@ -1,7 +1,8 @@
 import { ContextType, useContext, useEffect, useState } from "react";
 import { CoinsContext } from "../../context";
-import { getLocalCoins, setInitialCoins } from "../../utils/manageLocalStorage";
+import { getLocalCoins, setInitialCoins } from "../../utils/localStorageManagment";
 import Widget from "../widget/Widget";
+import './Container.sass'
 
 
 const Container = () => {
@@ -10,7 +11,6 @@ const Container = () => {
 
     return (
         <div className="container">
-            <button onClick={() => console.log(contextCoins)}>check</button>
             <ul className="container__ul">
                 {contextCoins && contextCoins.length ? (
                     contextCoins.map((item: string, index: number) => (

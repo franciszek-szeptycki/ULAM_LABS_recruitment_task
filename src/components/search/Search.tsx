@@ -30,6 +30,11 @@ const Search = () => {
         setSuggestions(options);
     };
 
+    const inputClear = (): any => {
+        setInputValue("")
+        setSuggestions([]);
+    }
+
     return (
         <div className="search">
             <div className="search__input-wrapper">
@@ -44,7 +49,7 @@ const Search = () => {
             </div>
             <ul className="search__ul">
                 {suggestions.map((item, index) => (
-                    index < 8 && <SearchLi key={index} id={item} />
+                    index < 8 && <SearchLi key={index} id={item} inputClear={inputClear} />
                 ))}
             </ul>
         </div>

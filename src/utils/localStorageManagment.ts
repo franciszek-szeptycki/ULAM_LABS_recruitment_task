@@ -36,3 +36,16 @@ export const checkIsUserNew = (): boolean => {
 	if (!isUserNew) return true
 	else return false
 }
+
+// REMOVE CRYPTOCURRENCY AND RETURN NEW ARRAY
+export const removeLocalCoin = (id: string): string[] => {
+	const localCoins: string[] = getLocalCoins()
+
+	const itemIndex = localCoins.indexOf(id)
+	localCoins.splice(itemIndex, 1)
+	localStorage.removeItem(COINS)
+
+	localStorage.setItem(COINS, JSON.stringify(localCoins));
+	
+	return localCoins
+}
