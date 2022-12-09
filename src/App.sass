@@ -1,3 +1,5 @@
+@import './assets/sass/var'
+	
 .App
 	width: 100vw
 	height: 100vh
@@ -19,9 +21,10 @@
 		width: 50%
 		height: 100vh
 		max-width: 450px
-		// background-image: url('./assets/img/purple.webp')
-		// background-size: 100% 100%
-		background-color: cadetblue
+		background-color: $dark-blue
+
+		// @include flex-center
+		position: relative
 
 		.toggle
 			position: fixed
@@ -33,6 +36,7 @@
 	.main
 		flex-grow: 1
 		height: 100vh
+		background-color: $light-1
 
 
 

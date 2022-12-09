@@ -1,8 +1,9 @@
-import { ChangeEvent, FormEventHandler, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useQuery } from "react-query";
 import { setLocalCoins } from "../../utils/manageLocalStorage";
 import { getCoinsList } from "../../api/coinAPI";
 import "./Search.sass";
+import SearchLi from "./SearchLi";
 
 const Search = () => {
     const [inputValue, setInputValue] = useState("");
@@ -27,30 +28,27 @@ const Search = () => {
 
         if (!text) return setSuggestions([]);
 
-        const options: string[] = coinsList.filter((item) => item.includes(text));
+        const options: string[] = coinsList.filter((item) =>
+            item.includes(text)
+        );
         setSuggestions(options);
     };
 
     return (
         <div className="search">
-            <form className="search__form" onSubmit={handleSubmit}>
-                <div className="search__form-input-wrapper">
-                    <input
-                        className="search__form-input"
-                        type="text"
-                        value={inputValue}
-                        onChange={handleChange}
-                    />
-                </div>
+            <div className="search__input-wrapper">
+                <i className="fa-solid fa-magnifying-glass"></i>
                 <input
-                    className="search__form-submit"
-                    type="submit"
-                    value="submit"
+                    className="search__input"
+                    type="text"
+                    value={inputValue}
+                    onChange={handleChange}
+                    placeholder="Enter crypto name..."
                 />
-            </form>
-            <ul className="search__suggestions">
+            </div>
+            <ul className="search__ul">
                 {suggestions.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    index < 8 && <SearchLi key={index} id={item} />
                 ))}
             </ul>
         </div>
