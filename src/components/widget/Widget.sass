@@ -10,12 +10,27 @@
 	padding: 10px
 	
 	position: relative
+	opacity: .85
+
+	&:hover
+		opacity: 1
+		cursor: pointer
 
 	&__shortcut
 		display: flex
 		align-items: center
 		gap: 10px
 
+		&-img-wrapper
+			background-color: $light-1
+			width: 50px
+			height: 50px
+			padding: 5px
+			border-radius: 50%
+
+		&-img
+			max-width: 100%
+			max-height: 100%
 
 		&-symbol
 			color: $gray-1
@@ -59,8 +74,6 @@
 	.widget
 		display: grid
 		grid-template-columns: 300px auto
-
-		// &__shortcut
 
 		&__info
 			display: flex

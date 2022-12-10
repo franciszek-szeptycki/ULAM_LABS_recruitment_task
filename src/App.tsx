@@ -3,6 +3,7 @@ import Container from "./components/container/Container";
 import { useState } from "react";
 import "./App.sass";
 import { CoinsContext, initCoinsContext } from "./context";
+import Header from "./components/header/Header";
 
 const App = () => {
     const [panelMode, setPanelMode] = useState(1);

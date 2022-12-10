@@ -6,6 +6,7 @@ import "./Widget.sass";
 import LoadingSpinner from "../loading-sign/LoadingSpinner";
 import { removeLocalCoin } from "../../utils/localStorageManagment";
 import { CoinsContext } from "../../context";
+import convertString from "../../utils/convertStringToColor";
 
 const Widget = (props: { id: string }) => {
     const { id } = props;
@@ -39,33 +40,37 @@ const Widget = (props: { id: string }) => {
     //     return colors
     // }
 
-    const dataSet = [33, 57, 84, 21, 60]
+    const dataSet = [33, 57, 84, 21, 60];
 
     switch (status) {
         case "loading":
             return (
-                <div className="widget">
+                <div className="widget" style={{ position: "relative" }}>
                     <LoadingSpinner x="40px" y="40px" border="5px" />
                 </div>
             );
+
         case "success":
             if (isRefetching) return <></>;
 
-            // const rndCol = generateRandomColors();
+            const rndCol: string = convertString(id);
+            console.log(rndCol);
 
             return (
                 <div
                     className="widget"
-                    // style={{
-                    //     backgroundColor: `rgb(${rndCol[0]}, ${rndCol[1]}, ${rndCol[2]})`,
-                    // }}
+                    style={{
+                        backgroundColor: rndCol,
+                    }}
                 >
                     <div className="widget__shortcut">
-                        <img
-                            src={content.image.small}
-                            alt={`${id} logo`}
-                            className="widget__shortcut-img"
-                        />
+                        <div className="widget__shortcut-img-wrapper">
+                            <img
+                                src={content.image.small}
+                                alt={`${id} logo`}
+                                className="widget__shortcut-img"
+                            />
+                        </div>
                         <p className="widget__shortcut-symbol">
                             {content.symbol}
                         </p>
