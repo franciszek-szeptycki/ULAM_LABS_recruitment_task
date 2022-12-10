@@ -39,6 +39,8 @@ const Widget = (props: { id: string }) => {
     //     return colors
     // }
 
+    const dataSet = [33, 57, 84, 21, 60]
+
     switch (status) {
         case "loading":
             return (
