@@ -18,11 +18,15 @@ const Chart = () => {
     const initializeChartData = () => {
         const coinsPrices: any[] = []
         coinsContext.map((id: string) => {
+            const info = useQuery(`fetch-${id}-info`, () => getCoinInfo(id))
+
             const { data } = useQuery(`fetch-prices-of-${id}`, () =>
                 getCoinPrices(id, "usd")
             );
 
-            if (data) {
+
+            if (data && info) {
+                const name: string = info.data.data.name
                 const coinData = data.data.prices.map((item: any, index: number) => {
 
                     const date = new Date(item[0])
@@ -30,11 +34,11 @@ const Chart = () => {
                     const minutes = date.getMinutes()
                     time.push(`${hours}:${minutes < 10 ? `0${minutes}` : minutes}`)
                     
+                    const chartItem: any = {name}
+                    chartItem[name] = item[1]
+                    console.log(chartItem)
 
-                    coinsPrices.push({
-                        name: id,
-                        price: item[1],
-                    })
+                    coinsPrices.push(chartItem)
 
                 })
                 
@@ -56,13 +60,13 @@ const Chart = () => {
             return (
                 <LineChart width={400} height={400} data={chartData}>
                     {chartData.map((item, index) => {
-                        console.log(item);
+                        const coinName = item.name
                         return (<Line
                             key={index}
                             type="monotone"
-                            dataKey="price"
+                            dataKey={item.name}
                             // data={1}
-                            name="date"
+                            name={item.name}
                             stroke="#ccc"
                         />);
                     })}
