@@ -54,14 +54,14 @@ const Widget = (props: { id: string }) => {
                                 className="widget__shortcut-img"
                             />
                         </div>
-                        <p className="widget__shortcut-info">
+                        <div className="widget__shortcut-info">
                             <p className="widget__shortcut-info-symbol">
                                 {content.symbol}
                             </p>
                             <p className="widget__shortcut-info-name">
                                 {content.name}
                             </p>
-                        </p>
+                        </div>
                     </div>
                     <div className="widget__price">
                         {content.market_data.current_price["usd"]} USD
