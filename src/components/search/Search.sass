@@ -1,59 +1,46 @@
 @import '../../assets/sass/var'
 	
 .search
-	width: 80%
-	min-width: 280px
-	height: 80%
-	max-height: 440px
+	width: 100%
 
-	position: absolute
-	top: 50%
-	left: 50%
-	transform: translate(-50%, -50%)
+	position: fixed
+	top: 0
+	z-index: 1
+	
+	padding: 0 20px
+	background-color: $dark-blue
 
-	background-color: $light-1
-	border: 2px solid $gray-1
-	border-radius: 20px
-
-	padding: 20px
 	display: flex
-	align-items: center
 	flex-direction: column
 
 	&__input-wrapper
-		height: 40px
-
-		border-bottom: 1px solid $gray-2
-
-		padding-top: 6px
-		@include flex-center
-
-		i
-			padding: 5px
-			color: $gray-2
-
-	&__input
-		width: 95%
-		height: 44px
-
-		border-bottom-color: $gray-2
-		border: none
-		padding: 0 10px 
-		background-color: transparent
-		color: $gray-2
+		height: $search-height-mobile
+		padding: 10px
 
 		font-size: 1.2rem
+		color: $gray-1
+
+		@include flex-center
+
+	&__input
+		width: 80%
+		
+		border: none
+		padding: 0 10px 
+
+		background-color: transparent
+		color: $gray-1
 
 		&:focus
 			outline: none
+
+		&::placeholder
+			color: $gray-2
 	
 	&__ul
 		width: 100%
 		
-		gap: 3px
-		padding: 10px
+		gap: 1px
 
-		display: flex
-		flex-direction: column
-		align-items: center
+		@include flex-list
 		

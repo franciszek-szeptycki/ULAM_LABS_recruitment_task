@@ -31,18 +31,6 @@ const Widget = (props: { id: string }) => {
         setCoinsContext(localCoins);
     };
 
-    // const generateRandomColors = (): number[] =>{
-    //     const colors = []
-    //     for (let i = 0; i < 3; i++) {
-    //         let color = Math.floor(Math.random() * 56)
-    //         color += 180
-    //         colors.push(color)
-    //     }
-    //     return colors
-    // }
-
-    const dataSet = [33, 57, 84, 21, 60];
-
     switch (status) {
         case "loading":
             return (
@@ -55,15 +43,9 @@ const Widget = (props: { id: string }) => {
             if (isRefetching) return <></>;
 
             const rndCol: string = convertString(id);
-            console.log(rndCol);
 
             return (
-                <div
-                    className="widget"
-                    style={{
-                        backgroundColor: rndCol,
-                    }}
-                >
+                <div className="widget">
                     <div className="widget__shortcut">
                         <div className="widget__shortcut-img-wrapper">
                             <img
@@ -72,16 +54,17 @@ const Widget = (props: { id: string }) => {
                                 className="widget__shortcut-img"
                             />
                         </div>
-                        <p className="widget__shortcut-symbol">
-                            {content.symbol}
+                        <p className="widget__shortcut-info">
+                            <p className="widget__shortcut-info-symbol">
+                                {content.symbol}
+                            </p>
+                            <p className="widget__shortcut-info-name">
+                                {content.name}
+                            </p>
                         </p>
-                        <p className="widget__shortcut-name">{content.name}</p>
                     </div>
-                    <div className="widget__info">
+                    <div className="widget__price">
                         {content.market_data.current_price["usd"]} USD
-                    </div>
-                    <div className="widget__icon-chart">
-                        <i className="fa-solid fa-chart-column"></i>
                     </div>
                     <button className="widget__close" onClick={handleCloseBtn}>
                         <i className="fa-solid fa-xmark"></i>

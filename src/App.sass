@@ -2,48 +2,15 @@
 	
 .App
 	width: 100vw
-	height: 100vh
-	overflow: hidden
-	position: relative
-
-	.wrapper
-		position: absolute
-		display: flex
-		width: 200vw
-		
-	.wrapper.panel-mode1
-		left: -100vw
-
-	.wrapper.panel-mode2
-		left: 0vw
+	min-height: 100vh
+	
+	display: grid
+	grid-template-columns: auto
+	grid-template-rows: auto auto
 
 	.aside
-		width: 50%
-		height: 100vh
-		max-width: 450px
+		padding-top: $search-height-mobile
+		width: 100%
 		background-color: $dark-blue
-
-		// @include flex-center
-		position: relative
-
-		.toggle
-			position: fixed
-			z-index: 1
-			top: 0
-			right: 50%
-			transition: 0
 	
-	.main
-		flex-grow: 1
-		height: 100vh
-		background-color: $light-1
-		
-
-
-
-@media (min-width: 451px)
-	.App
-		.wrapper
-			width: calc(100vw)
-		.wrapper.panel-mode1, .wrapper.panel-mode2
-			left: 0px
+	.main		

@@ -49,18 +49,11 @@ const SearchLi = (props: { id: string; inputClear: () => {} }) => {
         case "success":
             if (isRefetching) return <></>;
 
-            const rndColor = convertString(id)
-
             return (
-                <li className="search__li" style={{"backgroundColor" : rndColor}} onClick={handleSearchCoin}>
-                    <div className="search__li-img-wrapper">
-                        <img
-                            src={content.image.thumb}
-                            className="search__li-img"
-                        />
-                    </div>
-                    <p className="search__li-name">
-                        {content.symbol} - {id}
+                <li className="search__li" onClick={handleSearchCoin}>
+                    <img src={content.image.thumb} className="search__li-img" />
+                    <p className="search__li-info">
+                        <p className="search__li-info-symbol">{content.symbol}</p><p className="search__li-info-name">{content.name}</p>
                     </p>
                 </li>
             );

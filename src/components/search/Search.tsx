@@ -22,10 +22,8 @@ const Search = () => {
         },
     });
 
-
     // USED WHEN USER CHANGES CONTENT OF INPUT
     const handleChange = (e: any) => {
-
         const text: string = e.target.value;
         setInputValue(text);
 
@@ -38,11 +36,11 @@ const Search = () => {
         );
 
         const nonRepeatedOptions = options.filter((item) => {
-            let finalItem: string | false = item
+            let finalItem: string | false = item;
             coinsContext.map((element) => {
-                if (element === item) finalItem = false
+                if (element === item) finalItem = false;
             });
-            return finalItem
+            return finalItem;
         });
 
         setSuggestions(nonRepeatedOptions);
@@ -63,7 +61,7 @@ const Search = () => {
                     type="text"
                     value={inputValue}
                     onChange={handleChange}
-                    placeholder="Enter crypto name..."
+                    placeholder="Search..."
                 />
             </div>
             <ul className="search__ul">
