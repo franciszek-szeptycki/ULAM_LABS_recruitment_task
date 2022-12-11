@@ -9,7 +9,7 @@ const newsAPI = axios.create({
 
 // GET PRICES OF CRYPTOCURRENCY FROM THE LAST 24H
 export const getCoinPrices = async (id: string, vsCurrency: string): Promise<any> => {
-	return newsAPI.get(`coins/${id}/market_chart?vs_currency=${vsCurrency}&days=1`)
+	return newsAPI.get(`coins/${id}/market_chart?vs_currency=${vsCurrency}&days=1&interval=hourly`)
 
 };
 

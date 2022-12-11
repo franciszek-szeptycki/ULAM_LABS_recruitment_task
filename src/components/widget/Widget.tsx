@@ -7,6 +7,7 @@ import LoadingSpinner from "../loading-sign/LoadingSpinner";
 import { removeLocalCoin } from "../../utils/localStorageManagment";
 import { CoinsContext } from "../../context";
 import convertString from "../../utils/convertStringToColor";
+import Chart from "../charts/Chart";
 
 const Widget = (props: { id: string }) => {
     const { id } = props;

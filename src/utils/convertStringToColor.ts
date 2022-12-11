@@ -9,7 +9,6 @@ const convertString = (text: string): string => {
     
     while (color.length <= 6) {
         color = color + color
-        console.log(color)
     }
 
     color = color.substring(0, 6)
