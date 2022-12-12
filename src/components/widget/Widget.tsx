@@ -1,13 +1,11 @@
 import { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { getCoinInfo } from "../../api/coinAPI";
-import WidgetError from "./WidgetError";
 import "./Widget.sass";
 import LoadingSpinner from "../loading-sign/LoadingSpinner";
 import { removeLocalCoin } from "../../utils/localStorageManagment";
 import { CoinsContext } from "../../context";
 import convertString from "../../utils/convertStringToColor";
-import Chart from "../charts/Chart";
 
 const Widget = (props: { id: string }) => {
     const { id } = props;

@@ -74,8 +74,6 @@ const Chart = () => {
                 {coinsNames ? (
                     <LineChart width={700} height={700} data={data}>
                         {coinsNames.map((item: string, index: number) => {
-                            console.log(item);
-                            console.log(data);
                             return (
                                 <Line
                                     key={index}

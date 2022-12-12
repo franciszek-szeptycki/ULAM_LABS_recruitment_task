@@ -20,18 +20,17 @@ const SearchLi = (props: { id: string; inputClear: () => {} }) => {
         // Check that this coin is not selected
         const localCoins = getLocalCoins();
         if (localCoins.includes(id))
-            return console.log("can not check this same crypto twice");
+            return 
 
         // Check the coins limit
         const done = setLocalCoin(id);
-        if (!done) return console.log("too much coins");
+        if (!done) return 
 
         // Set coin into the context
         const newLocalCoins = getLocalCoins();
         setCoinsContext(newLocalCoins);
 
         inputClear();
-        console.log("succesfully selected");
     };
 
     // FETCH INFO FOR SEARCHING SINGLE RESULT
