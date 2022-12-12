@@ -12,80 +12,80 @@ import {
 import { getCoinInfo, getCoinPrices } from "../../api/coinAPI";
 import { CoinsContext } from "../../context";
 import convertString from "../../utils/convertStringToColor";
+import { getLocalCoins } from "../../utils/localStorageManagment";
+import parseData from "./parseData";
 
-let chartData: any[] = [];
-let isLoading: boolean = true;
-let time: any = [];
+// let flag: boolean = true;
+let lastContext: any[] = [];
 
 const Chart = () => {
-    // GET COINS ID FROM CONTEXT
+    const [data, setData] = useState<any[]>([]);
+    const [timeline, setTimeline] = useState<string[]>([]);
+    const [coinsNames, setCoinsNames] = useState<string[]>([]);
+
     const coinsContext: string[] | undefined = useContext(CoinsContext).context;
-    if (!coinsContext) return <></>;
 
-    const initializeChartData = () => {
-        const coinsPrices: any[] = [];
-        coinsContext.map((id: string) => {
-            const info = useQuery(`fetch-${id}-info`, () => getCoinInfo(id));
+    if (lastContext !== coinsContext) {
+        lastContext = coinsContext;
+        // flag = false;
+        const run = async () => {
+            let coinsDataList: any[] = [];
+            let namesList: string[] = [];
 
-            const { data } = useQuery(`fetch-prices-of-${id}`, () =>
-                getCoinPrices(id, "usd")
-            );
+            for (let i = 0; i < coinsContext.length; i++) {
+                let item;
+                try {
+                    const protoInfo = await getCoinPrices(
+                        coinsContext[i],
+                        "usd"
+                    );
+                    const protoName = await getCoinInfo(coinsContext[i]);
 
-            if (data && info) {
-                const name: string = info.data.data.name;
-                const coinData = data.data.prices.map(
-                    (item: any, index: number) => {
-                        const date = new Date(item[0]);
-                        const hours = date.getHours();
-                        const minutes = date.getMinutes();
-                        time.push(
-                            `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`
-                        );
+                    const info = protoInfo.data.prices;
+                    const { name } = protoName.data;
 
-                        const chartItem: any = { name };
-                        chartItem[name] = item[1];
-                        console.log(chartItem);
-
-                        coinsPrices.push(chartItem);
+                    item = { name, info };
+                } catch {
+                    item = null;
+                } finally {
+                    if (item) {
+                        coinsDataList.push(item);
+                        namesList.push(item.name);
                     }
-                );
-
-                return coinData;
+                }
             }
-        });
-        chartData = coinsPrices;
-        isLoading = false;
-    };
+            const { list, time } = parseData(coinsDataList);
 
-    initializeChartData();
-
-    if (isLoading) return <div>loading</div>;
-    else {
-        if (chartData[0] === undefined) return <></>;
-        else {
-            // console.log(chartData.length)
-            return (
-                    <LineChart width={400} height={400} data={chartData}>
-                        {chartData.map((item, index) => {
-                            const coinName = item.name;
-                            return (
-                                <Line
-                                    key={index}
-                                    type="monotone"
-                                    dataKey={item.name}
-                                    // data={1}
-                                    name={item.name}
-                                    stroke="#ccc"
-                                />
-                            );
-                        })}
-                        <XAxis dataKey={time} />
-                        <YAxis />
-                        <Tooltip />
-                    </LineChart>
-            );
-        }
+            setData(list);
+            setTimeline(time);
+            setCoinsNames(namesList);
+        };
+        run();
     }
+
+    return (
+        <div className="chart-wrapper">
+            {/* <ResponsiveContainer width="100%" height="100%"> */}
+                <LineChart width={700} height={700} data={data}>
+                    {coinsNames.map((item: string, index: number) => {
+                        console.log(item);
+                        console.log(data);
+                        return (
+                            <Line
+                                key={index}
+                                type="monotone"
+                                dataKey={item}
+                                stroke={convertString(item)}
+                            />
+                        );
+                    })}
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                </LineChart>
+            {/* </ResponsiveContainer> */}
+        </div>
+    );
 };
 
 export default Chart;

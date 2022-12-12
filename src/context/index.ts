@@ -13,8 +13,9 @@ export const defaultObject = {
 }
 
 export const CoinsContext = createContext<ContextType>(defaultObject)
-
+	
 type ContextType = {
 	context: string[]
 	setContext: (context: string[]) => void
 }
+
