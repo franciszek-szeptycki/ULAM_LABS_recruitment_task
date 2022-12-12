@@ -16,6 +16,9 @@ const Container = () => {
     return (
         <>
             <div className="container">
+                <div className="container__counter">
+                    {contextCoins.length} / 5 
+                </div>
                 <ul className="container__ul">
                     {contextCoins && contextCoins.length ? (
                         contextCoins.map((item: string, index: number) => (
@@ -24,12 +27,9 @@ const Container = () => {
                             </li>
                         ))
                     ) : (
-                        <div>ni mo</div>
+                        <></>
                     )}
                 </ul>
-                <div className="container__counter">
-                    {contextCoins.length} / 5 
-                </div>
             </div>
         </>
     );

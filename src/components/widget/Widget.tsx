@@ -63,9 +63,6 @@ const Widget = (props: { id: string }) => {
                             </p>
                         </div>
                     </div>
-                    <div className="widget__price">
-                        {content.market_data.current_price["usd"]} USD
-                    </div>
                     <button className="widget__close" onClick={handleCloseBtn}>
                         <i className="fa-solid fa-xmark"></i>
                     </button>

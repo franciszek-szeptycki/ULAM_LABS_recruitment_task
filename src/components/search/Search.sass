@@ -2,10 +2,6 @@
 	
 .search
 	width: 100%
-
-	position: fixed
-	top: 0
-	z-index: 1
 	
 	padding: 0 20px
 	background-color: $dark-blue
@@ -14,11 +10,13 @@
 	flex-direction: column
 
 	&__input-wrapper
-		height: $search-height-mobile
+		height: calc($search-height-mobile - 20px)
+		
 		padding: 10px
+		border-bottom: 1px solid $light-2
 
 		font-size: 1.2rem
-		color: $gray-1
+		color: $light-3
 
 		@include flex-center
 
@@ -29,13 +27,13 @@
 		padding: 0 10px 
 
 		background-color: transparent
-		color: $gray-1
+		color: $light-3
 
 		&:focus
 			outline: none
 
 		&::placeholder
-			color: $gray-2
+			color: $light-2
 	
 	&__ul
 		width: 100%
@@ -43,4 +41,3 @@
 		gap: 1px
 
 		@include flex-list
-		

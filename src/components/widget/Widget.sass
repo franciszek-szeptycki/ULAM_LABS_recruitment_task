@@ -6,6 +6,8 @@
 
 	background-color: $dark-blue
 	padding: 20px 10px
+	border-radius: 5px
+	box-shadow: 0 0 10px 0 $regular-blue
 
 	display: flex
 	align-items: center
@@ -42,9 +44,6 @@
 			&-name
 				color: $light-2
 
-	&__price
-		display: none
-
 	&__close
 		width: 20px
 		height: 20px
@@ -61,11 +60,38 @@
 
 
 
-@media (min-width: 601px)
+@media (min-width: 701px)
 	.widget
-		display: grid
-		grid-template-columns: 300px auto
+		width: 70px
+		height: 50px
+		padding: 5px
+		
+		@include flex-center
 
-		&__info
-			display: flex
-			align-items: center
+		&__shortcut
+
+			&-img-wrapper
+				width: 40px
+				height: 40px
+
+			&-info
+				display: none
+
+		&__close
+			top: 5px
+			right: 5px
+
+@media (min-width: 851px)
+	.widget
+		width: 100%
+		height: 70px
+		justify-content: flex-start
+
+		&__shortcut
+
+			&-img-wrapper
+				width: 50px
+				height: 50px
+
+			&-info
+				display: flex

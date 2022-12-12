@@ -8,6 +8,8 @@ import {
     YAxis,
     Tooltip,
     ResponsiveContainer,
+    CartesianGrid,
+    Legend,
 } from "recharts";
 import { getCoinInfo, getCoinPrices } from "../../api/coinAPI";
 import { CoinsContext } from "../../context";
@@ -66,23 +68,29 @@ const Chart = () => {
     return (
         <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height="100%">
-                <LineChart width={700} height={700} data={data}>
-                    {coinsNames.map((item: string, index: number) => {
-                        console.log(item);
-                        console.log(data);
-                        return (
-                            <Line
-                                key={index}
-                                type="monotone"
-                                dataKey={item}
-                                stroke={convertString(item)}
-                            />
-                        );
-                    })}
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                </LineChart>
+                {coinsNames ? (
+                    <LineChart width={700} height={700} data={data}>
+                        {coinsNames.map((item: string, index: number) => {
+                            console.log(item);
+                            console.log(data);
+                            return (
+                                <Line
+                                    key={index}
+                                    type="monotone"
+                                    dataKey={item}
+                                    stroke={convertString(item)}
+                                />
+                            );
+                        })}
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                        <CartesianGrid strokeDasharray="5 5" />
+                        <Legend />
+                        <Tooltip/>
+                    </LineChart>
+                ) : (
+                    <></>
+                )}
             </ResponsiveContainer>
         </div>
     );

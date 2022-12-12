@@ -7,7 +7,6 @@ import Header from "./components/header/Header";
 import Chart from "./components/charts/Chart";
 
 const App = () => {
-    const [panelMode, setPanelMode] = useState(1);
 
     const [coinsContextValue, setCoinsContextValue] = useState(
         initCoinsContext()
@@ -24,8 +23,10 @@ const App = () => {
             }}
         >
             <div className="App">
-                <aside className="aside">
+                <header className="header">
                     <Search />
+                </header>
+                <aside className="aside">
                     <Container />
                 </aside>
                 <main className="main">
