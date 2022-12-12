@@ -15,25 +15,27 @@ import { getCoinInfo, getCoinPrices } from "../../api/coinAPI";
 import { CoinsContext } from "../../context";
 import convertString from "../../utils/convertStringToColor";
 import { getLocalCoins } from "../../utils/localStorageManagment";
-import parseData from "./parseData";
+import prepareData from "./prepareData";
 
-// let flag: boolean = true;
 let lastContext: any[] = [];
 
 const Chart = () => {
     const [data, setData] = useState<any[]>([]);
-    const [timeline, setTimeline] = useState<string[]>([]);
     const [coinsNames, setCoinsNames] = useState<string[]>([]);
 
+    // Getting info about coins
     const coinsContext: string[] | undefined = useContext(CoinsContext).context;
 
+    // If user has changed context 
+    // => flag(single rendering of this function on context change)
     if (lastContext !== coinsContext) {
         lastContext = coinsContext;
-        // flag = false;
+
         const run = async () => {
             let coinsDataList: any[] = [];
             let namesList: string[] = [];
 
+            // Fetching data to the chart
             for (let i = 0; i < coinsContext.length; i++) {
                 let item;
                 try {
@@ -56,10 +58,11 @@ const Chart = () => {
                     }
                 }
             }
-            const { list, time } = parseData(coinsDataList);
+
+            // Getting data prepared to chart
+            const list = prepareData(coinsDataList);
 
             setData(list);
-            setTimeline(time);
             setCoinsNames(namesList);
         };
         run();
@@ -86,7 +89,7 @@ const Chart = () => {
                         <YAxis />
                         <CartesianGrid strokeDasharray="5 5" />
                         <Legend />
-                        <Tooltip/>
+                        <Tooltip />
                     </LineChart>
                 ) : (
                     <></>

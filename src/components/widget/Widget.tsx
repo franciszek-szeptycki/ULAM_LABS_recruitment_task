@@ -32,13 +32,6 @@ const Widget = (props: { id: string }) => {
     };
 
     switch (status) {
-        case "loading":
-            return (
-                <div className="widget" style={{ position: "relative" }}>
-                    <LoadingSpinner x="40px" y="40px" border="5px" />
-                </div>
-            );
-
         case "success":
             if (isRefetching) return <></>;
 
@@ -69,8 +62,13 @@ const Widget = (props: { id: string }) => {
                 </div>
             );
         default:
-            return <WidgetError />;
+            return (
+                <div className="widget" style={{ position: "relative" }}>
+                    <LoadingSpinner x="40px" y="40px" border="5px" />
+                </div>
+            );
     }
 };
 
 export default Widget;
+``

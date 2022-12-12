@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import { getLocalCoins, setInitialCoins } from "../utils/localStorageManagment";
 
+// IF USER IS NEW USER, SETS "Bitcoin" AND "Ethereum" IN LOCALSTORAGE
+// AND RETURNS THEM
 export const initCoinsContext = (): string[] => {
 	setInitialCoins()
 	const localCoins = getLocalCoins()

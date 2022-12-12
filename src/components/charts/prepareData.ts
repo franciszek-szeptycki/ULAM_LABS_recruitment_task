@@ -1,8 +1,8 @@
-const parseData = (array: any[]): {time: string[], list: any[]} => {
+const prepareData = (array: any[]): any[] => {
 	const list: any[] = []
 	let time: string[] = []
 
-	if (!array.length) return { list, time }
+	if (!array.length) return list
 	
 	const chartItemsAmount = array[0].info.length
 
@@ -20,10 +20,10 @@ const parseData = (array: any[]): {time: string[], list: any[]} => {
 		list.push(chartItem)
 	}
 		
-	return { list, time}
+	return list
 }
 
-export default parseData
+export default prepareData
 
 function getDateToChart (array: any) {
 	const date = new Date(array)
