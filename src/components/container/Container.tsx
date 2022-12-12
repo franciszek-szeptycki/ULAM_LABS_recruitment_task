@@ -5,7 +5,6 @@ import {
     setInitialCoins,
 } from "../../utils/localStorageManagment";
 import Chart from "../charts/Chart";
-import Header from "../header/Header";
 import Widget from "../widget/Widget";
 import "./Container.sass";
 
