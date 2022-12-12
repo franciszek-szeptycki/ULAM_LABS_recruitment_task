@@ -1,52 +1,75 @@
 import { interpolateMagma } from "d3";
 import { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    Tooltip,
+    ResponsiveContainer,
+} from "recharts";
 import { getCoinInfo, getCoinPrices } from "../../api/coinAPI";
 import { CoinsContext } from "../../context";
 import convertString from "../../utils/convertStringToColor";
+import { getLocalCoins } from "../../utils/localStorageManagment";
 import parseData from "./parseData";
 
-let chartData: any[] = [];
-let isLoading: boolean = true;
-let coinsNames: string[] = [];
-let timeline: any = []
+// let flag: boolean = true;
+let lastContext: any[] = [];
 
 const Chart = () => {
-    // GET COINS ID FROM CONTEXT
+    const [data, setData] = useState<any[]>([]);
+    const [timeline, setTimeline] = useState<string[]>([]);
+    const [coinsNames, setCoinsNames] = useState<string[]>([]);
+
     const coinsContext: string[] | undefined = useContext(CoinsContext).context;
-    if (!coinsContext) return <></>;
 
-    const initializeChartData = () => {
-        const dataToParse: any[] = [];
-        coinsContext.map((id: string) => {
-            const info = useQuery(`fetch-${id}-info`, () => getCoinInfo(id));
+    if (lastContext !== coinsContext) {
+        lastContext = coinsContext;
+        // flag = false;
+        const run = async () => {
+            let coinsDataList: any[] = [];
+            let namesList: string[] = [];
 
-            const { data } = useQuery(`fetch-prices-of-${id}`, () =>
-                getCoinPrices(id, "usd")
-            );
+            for (let i = 0; i < coinsContext.length; i++) {
+                let item;
+                try {
+                    const protoInfo = await getCoinPrices(
+                        coinsContext[i],
+                        "usd"
+                    );
+                    const protoName = await getCoinInfo(coinsContext[i]);
 
-            if (data && info.data) {
-                const { name } = info.data.data;
-                coinsNames.push(name);
-                dataToParse.push({ name, data });
+                    const info = protoInfo.data.prices;
+                    const { name } = protoName.data;
+
+                    item = { name, info };
+                } catch {
+                    item = null;
+                } finally {
+                    if (item) {
+                        coinsDataList.push(item);
+                        namesList.push(item.name);
+                    }
+                }
             }
-        });
-        const { time, list } = parseData(dataToParse);
-        chartData = list
-        console.log(time)
-        isLoading = false;
-    };
+            const { list, time } = parseData(coinsDataList);
 
-    initializeChartData();
+            setData(list);
+            setTimeline(time);
+            setCoinsNames(namesList);
+        };
+        run();
+    }
 
-    if (isLoading) return <div>loading</div>;
-    else {
-        if (chartData[0] === undefined) return <></>;
-        else {
-            return (
-                <LineChart width={700} height={700} data={chartData}>
-                    {coinsNames.map((item, index) => {
+    return (
+        <div className="chart-wrapper">
+            {/* <ResponsiveContainer width="100%" height="100%"> */}
+                <LineChart width={700} height={700} data={data}>
+                    {coinsNames.map((item: string, index: number) => {
+                        console.log(item);
+                        console.log(data);
                         return (
                             <Line
                                 key={index}
@@ -58,11 +81,11 @@ const Chart = () => {
                     })}
                     <XAxis dataKey="date" />
                     <YAxis />
-                    {/* <Tooltip /> */}
+                    <Tooltip />
                 </LineChart>
-            );
-        }
-    }
+            {/* </ResponsiveContainer> */}
+        </div>
+    );
 };
 
 export default Chart;

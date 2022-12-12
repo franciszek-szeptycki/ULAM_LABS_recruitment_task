@@ -28,7 +28,9 @@ const App = () => {
                     <Search />
                     <Container />
                 </aside>
-                <main className="main">{/* <Chart/> */}</main>
+                <main className="main">
+                    <Chart />
+                </main>
             </div>
         </CoinsContext.Provider>
     );
