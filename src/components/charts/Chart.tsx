@@ -65,7 +65,7 @@ const Chart = () => {
 
     return (
         <div className="chart-wrapper">
-            {/* <ResponsiveContainer width="100%" height="100%"> */}
+            <ResponsiveContainer width="100%" height="100%">
                 <LineChart width={700} height={700} data={data}>
                     {coinsNames.map((item: string, index: number) => {
                         console.log(item);
@@ -83,7 +83,7 @@ const Chart = () => {
                     <YAxis />
                     <Tooltip />
                 </LineChart>
-            {/* </ResponsiveContainer> */}
+            </ResponsiveContainer>
         </div>
     );
 };
